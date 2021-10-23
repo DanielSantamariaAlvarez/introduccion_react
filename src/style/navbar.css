@@ -1,0 +1,28 @@
+.color1 {
+  color: #132e0b;
+}
+
+.color2 {
+  color: #0c657e;
+}
+
+.color3 {
+  color: #ff592d;
+}
+
+.color4 {
+  color: #ffe455;
+}
+
+.color5 {
+  color: #fffbcc;
+}
+
+.navbar {
+  background: #ff592d;
+  color: #fffbcc;
+  padding: 15px;
+  font-size: 24px;
+  margin: 0 -24px;
+}
+/*# sourceMappingURL=navbar.css.map */

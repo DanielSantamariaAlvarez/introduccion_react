@@ -1,0 +1,51 @@
+.TodoSearch input {
+  background: #F9FBFC;
+  border-radius: 2px;
+  border: 2px solid #132e0b;
+  margin: 0 auto;
+  height: 64px;
+  width: calc(100% - 62px);
+  font-size: 24px;
+  text-align: center;
+  font-weight: 400;
+  color: #1E1E1F;
+  max-width: 500px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.TodoSearch p {
+  text-align: center;
+}
+
+.TodoSearch::-webkit-input-placeholder {
+  color: #132e0ba9;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.TodoSearch:-ms-input-placeholder {
+  color: #132e0ba9;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.TodoSearch::-ms-input-placeholder {
+  color: #132e0ba9;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.TodoSearch::placeholder {
+  color: #132e0ba9;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.TodoSearch input:focus {
+  outline-color: #0c657e;
+  -webkit-box-shadow: 0px 5px 10px #0c657e;
+          box-shadow: 0px 5px 10px #0c657e;
+}
+/*# sourceMappingURL=todoSearch.css.map */
