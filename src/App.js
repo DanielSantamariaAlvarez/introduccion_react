@@ -6,29 +6,49 @@ import CreateTodoButton from './components/CreateTodoButton';
 import TodoSearch from './components/TodoSearch';
 //import './App.css';
 
-const defaultTodos = [
-  {text: 'Cortar cebolla', completed: true},
-  {text: 'Limpiar cactus', completed: true},
-  {text: 'Despejar las nubes', completed: true},
-  {text: 'Manquear con el cesar en warzone', completed: false}
+// const defaultTodos = [
+//   {text: 'Cortar cebolla', completed: true},
+//   {text: 'Limpiar cactus', completed: true},
+//   {text: 'Despejar las nubes', completed: true},
+//   {text: 'Manquear con el cesar en warzone', completed: false}
   
-];
+// ];
+
+function useLocalStorage(itemName, initialValue){
+
+  
+  const localStorageItem = localStorage.getItem(itemName);
+  let parsedItem;
+
+  if (!localStorageItem) {
+    localStorage.setItem(itemName, JSON.stringify(initialValue));
+    parsedItem = [];
+  } else {
+    parsedItem = JSON.parse(localStorageItem);
+  }
+  const [item, setItem] = React.useState(parsedItem);
+
+
+  const saveItem = (newItem) => {
+    const stringifiedItem = JSON.stringify(newItem);
+    localStorage.setItem(itemName, stringifiedItem);
+    setItem(newItem);
+  };
+
+  
+
+  return [
+    item,
+    saveItem,
+  ];
+
+}
 
 function App() {
 
-  const localStorageTodos = localStorage.getItem('TODOS_V1');
-  let parsedTodos;
-
-  if (!localStorageTodos) {
-    localStorage.setItem('TODOS_V1', JSON.stringify([]));
-    parsedTodos = [];
-  } else {
-    parsedTodos = JSON.parse(localStorageTodos);
-  }
-
+  const [todos, saveTodos] = useLocalStorage('TODOS_v1', []);
   const [searchValue, setSearchValue] = React.useState('');
-  const [todos, setTodos] = React.useState(parsedTodos);
-
+  
   const completedTodos = todos.filter(todo => todo.completed).length;
   const totalTodos = todos.length;
   
@@ -45,11 +65,7 @@ function App() {
   }
 
 
-  const saveTodos = (newTodos) => {
-    const stringifiedTodos = JSON.stringify(newTodos);
-    localStorage.setItem('TODOS_V1', stringifiedTodos);
-    setTodos(newTodos);
-  };
+  
 
   const completeTodo = (text) =>{
     const index = todos.findIndex(todo =>todo.text === text);
@@ -64,6 +80,11 @@ function App() {
   }
 
 
+  React.useEffect(() => {
+
+  },[totalTodos])
+
+
   return (
     <>
       <TodoCounter 
@@ -75,6 +96,10 @@ function App() {
         setSearchValue={setSearchValue}
       />
       <TodoList>
+        {error && <p>Desespérate! Ocurrió un error</p>}
+        {loading && <p>Estamos cargando, no te desesperes...</p>}
+        {(!loading && !searchedTodos.length) && <p>Crea tu primer TODO!</p>}
+
         {searchedTodos.map(
           todo =>(
             <TodoItem 
